@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>翻譯設定</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">浮譯 <span class="version">v1.0</span></h1>
+    </div>
+    
+    <div class="language-selector">
+      <div class="lang-group">
+        <div class="select-wrapper">
+          <select id="source-lang">
+            <option value="auto">自動偵測</option>
+            <option value="en">英文</option>
+            <option value="ja">日文</option>
+            <option value="ko">韓文</option>
+            <option value="fr">法文</option>
+            <option value="de">德文</option>
+            <option value="es">西班牙文</option>
+          </select>
+          <span class="select-label">來源語言</span>
+        </div>
+      </div>
+      
+      <div class="arrow">→</div>
+      
+      <div class="lang-group">
+        <div class="select-wrapper">
+          <select id="target-lang">
+            <option value="zh-TW">繁體中文</option>
+            <option value="zh-CN">簡體中文</option>
+            <option value="en">英文</option>
+            <option value="ja">日文</option>
+          </select>
+          <span class="select-label">目標語言</span>
+        </div>
+      </div>
+    </div>
+    
+    <button id="save-settings">儲存</button>
+    
+    <div class="divider"></div>
+    
+    <div class="setting-row toggle-row">
+      <label for="auto-translate">自動翻譯</label>
+      <label class="toggle-switch">
+        <input type="checkbox" id="auto-translate" checked>
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
