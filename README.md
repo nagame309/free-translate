@@ -1,12 +1,12 @@
 <div align="center">
 
-# 🌸 浮譯 Free Translate
+# 🌸 浮譯 FreeTrans
 
 **一個優雅、輕量的 Chrome 翻譯擴充功能**
 
 選取即翻譯 • 毛玻璃設計 • 極簡體驗
 
-[![Version](https://img.shields.io/badge/version-1.0-FD5586?style=flat-square)](https://github.com/nagame309/free-translate)
+[![Version](https://img.shields.io/badge/version-2.0.0-FD5586?style=flat-square)](https://github.com/nagame309/free-translate)
 [![License](https://img.shields.io/badge/license-MIT-94e2d5?style=flat-square)](LICENSE)
 [![Chrome](https://img.shields.io/badge/Chrome-Extension-4285F4?style=flat-square&logo=googlechrome&logoColor=white)](https://github.com/nagame309/free-translate)
 [![Stars](https://img.shields.io/github/stars/nagame309/free-translate?style=flat-square&color=FD5586)](https://github.com/nagame309/free-translate/stargazers)
@@ -366,6 +366,6 @@ Made with ❤️ and ☕️
 
 *讓翻譯變得更簡單、更優雅*
 
-[⬆️ 回到頂部](#-浮譯-free-translate)
+[⬆️ 回到頂部](#-浮譯-freetrans)
 
 </div>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-main">
+        <img src="../icons/icon48.png" alt="Icon" class="header-icon">
+        <h1 data-i18n="title">浮譯設定</h1>
+      </div>
+      <button id="theme-toggle" class="icon-btn" title="切換深淺模式">
+        <svg class="sun-icon hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+    </div>
+
+    <!-- General Settings -->
+    <div class="section">
+      <div class="section-title">
+        <span data-i18n="general">一般設定</span>
+      </div>
+      
+      <div class="form-group">
+        <label for="ui-language" data-i18n="uiLang">介面語言</label>
+        <select id="ui-language">
+          <option value="zh-TW">繁體中文</option>
+          <option value="en">English</option>
+        </select>
+        <div class="hint" data-i18n="langHint">設定將自動儲存並套用至全域介面。</div>
+      </div>
+    </div>
+
+    <!-- AI Settings -->
+    <div class="section">
+      <div class="section-title">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span data-i18n="aiSettings">AI 翻譯設定</span>
+          <span class="badge">OpenAI / Compatible</span>
+          <button id="test-ai-btn" class="text-link-btn" data-i18n="testAI">測試連線</button>
+          <span id="test-status" style="font-size: 12px; font-weight: 600; margin-left: 4px;"></span>
+        </div>
+      </div>
+      <div class="hint" style="margin-top: -16px; margin-bottom: 20px;">
+        <span data-i18n="aiCompatibilityHint">支援 OpenAI 官方 API 及所有相容其格式的第三方 AI 服務（如：DeepSeek, OpenRouter, Ollama, Local AI 等）。</span>
+      </div>
+      
+      <div class="form-group">
+        <label for="openai-base-url" data-i18n="baseUrl">Base URL</label>
+        <input type="text" id="openai-base-url" placeholder="https://api.openai.com/v1">
+        <div class="hint" data-i18n="urlHint">預設為 OpenAI 官方節點。如使用轉發服務或 Local AI，請填入完整 URL。</div>
+      </div>
+
+      <div class="form-group">
+        <label for="openai-api-key" data-i18n="apiKey">API Key</label>
+        <input type="password" id="openai-api-key" placeholder="sk-...">
+        <div class="hint" data-i18n="keyHint">您的金鑰僅會儲存在本機瀏覽器中，不會上傳至任何伺服器。</div>
+      </div>
+
+      <div class="form-group">
+        <label for="openai-model" data-i18n="model">Model</label>
+        <input type="text" id="openai-model" placeholder="gpt-3.5-turbo">
+      </div>
+
+      <details>
+        <summary data-i18n="advancedSettings">進階</summary>
+        
+        <div class="form-group" style="margin-top: 16px;">
+          <label for="openai-prompt" data-i18n="sysPrompt">System Prompt</label>
+          <textarea id="openai-prompt" style="min-height: 120px;"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="openai-user-prompt" data-i18n="userPromptLabel">User Prompt</label>
+          <textarea id="openai-user-prompt" style="min-height: 80px;"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="openai-temperature" data-i18n="tempLabel">Temperature</label>
+          <input type="number" id="openai-temperature" step="0.1" min="0" max="2" placeholder="0">
+        </div>
+      </details>
+
+      <div class="save-bar">
+        <button id="save-ai-btn" class="save-btn" data-i18n="saveAI">儲存 AI 翻譯設定</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" data-i18n="saved">設定已儲存 ✓</div>
+  <script src="options.js"></script>
+</body>
+</html>

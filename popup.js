@@ -1,87 +1,131 @@
-// Popup script for translation extension settings
+// Popup Logic
 
-document.addEventListener('DOMContentLoaded', function() {
+const translations = {
+  'zh-TW': {
+    title: '浮譯',
+    sourceLang: '來源語言',
+    targetLang: '目標語言',
+    autoTranslate: '啟用劃詞翻譯',
+    service: '翻譯服務',
+    save: '儲存設定',
+    saved: '設定已儲存 ✓',
+    autoDetect: '自動偵測'
+  },
+  'en': {
+    title: 'FreeTrans',
+    sourceLang: 'Source',
+    targetLang: 'Target',
+    autoTranslate: 'Selection Translate',
+    service: 'Service',
+    save: 'Save',
+    saved: 'Saved ✓',
+    autoDetect: 'Auto Detect'
+  }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
   const sourceLangSelect = document.getElementById('source-lang');
   const targetLangSelect = document.getElementById('target-lang');
-  const autoTranslateCheckbox = document.getElementById('auto-translate');
-  const saveButton = document.getElementById('save-settings');
+  const autoTranslateCheck = document.getElementById('auto-translate');
+  const serviceSelect = document.getElementById('service-select');
+  const saveBtn = document.getElementById('save-settings');
+  const optionsBtn = document.getElementById('options-btn');
+  const feedback = document.getElementById('save-feedback');
+  
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const sunIcon = themeToggleBtn.querySelector('.sun-icon');
+  const moonIcon = themeToggleBtn.querySelector('.moon-icon');
 
-  // Load saved settings
-  loadSettings();
-
-  // Save settings when button is clicked
-  saveButton.addEventListener('click', saveSettings);
-
-  // Add arrow rotation on select open/close
-  const selects = [sourceLangSelect, targetLangSelect];
-  selects.forEach(select => {
-    let isOpen = false;
+  // Load settings
+  chrome.storage.sync.get({
+    sourceLang: 'auto',
+    targetLang: 'zh-TW',
+    autoTranslate: true,
+    service: 'google',
+    theme: 'light',
+    uiLanguage: 'zh-TW'
+  }, (items) => {
+    sourceLangSelect.value = items.sourceLang;
+    targetLangSelect.value = items.targetLang;
+    autoTranslateCheck.checked = items.autoTranslate;
+    serviceSelect.value = items.service;
     
-    select.addEventListener('click', function(e) {
-      // Toggle open state
-      isOpen = !isOpen;
-      if (isOpen) {
-        this.classList.add('select-open');
-      } else {
-        this.classList.remove('select-open');
+    // Apply Theme
+    applyTheme(items.theme);
+
+    // Apply Language
+    updateLanguage(items.uiLanguage);
+
+    // Initial Button State
+    toggleSaveButton(items.autoTranslate);
+  });
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark') {
+      sunIcon.classList.add('hidden');
+      moonIcon.classList.remove('hidden');
+    } else {
+      sunIcon.classList.remove('hidden');
+      moonIcon.classList.add('hidden');
+    }
+  }
+
+  // Theme Toggle Logic
+  themeToggleBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const newTheme = isDark ? 'light' : 'dark';
+    applyTheme(newTheme);
+    chrome.storage.sync.set({ theme: newTheme });
+  });
+
+  function toggleSaveButton(isEnabled) {
+    saveBtn.disabled = !isEnabled;
+  }
+
+  // Auto-save toggle state and update button
+  autoTranslateCheck.addEventListener('change', () => {
+    const isChecked = autoTranslateCheck.checked;
+    toggleSaveButton(isChecked);
+    
+    // Auto-save the toggle state immediately
+    chrome.storage.sync.set({ autoTranslate: isChecked });
+  });
+
+  function updateLanguage(lang) {
+    const t = translations[lang] || translations['zh-TW'];
+    
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key]) {
+        // Only update text content to preserve potential structure
+        el.textContent = t[key];
       }
     });
-    
-    select.addEventListener('blur', function() {
-      // Reset when losing focus
-      isOpen = false;
-      this.classList.remove('select-open');
+
+    // Update the 'Auto Detect' option text specifically
+    const autoOption = sourceLangSelect.querySelector('option[value="auto"]');
+    if (autoOption) autoOption.textContent = t.autoDetect;
+  }
+
+  // Save Settings
+  saveBtn.addEventListener('click', () => {
+    chrome.storage.sync.set({
+      sourceLang: sourceLangSelect.value,
+      targetLang: targetLangSelect.value,
+      autoTranslate: autoTranslateCheck.checked,
+      service: serviceSelect.value
+    }, () => {
+      // Show feedback
+      feedback.style.opacity = '1';
+      feedback.style.animation = 'none';
+      feedback.offsetHeight; /* trigger reflow */
+      feedback.style.animation = 'saveFeedback 1.2s ease forwards';
     });
   });
 
-  function loadSettings() {
-    if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.sync) {
-      chrome.storage.sync.get({
-        sourceLang: 'auto',
-        targetLang: 'zh-TW',
-        autoTranslate: true
-      }, function(items) {
-        sourceLangSelect.value = items.sourceLang || 'auto';
-        targetLangSelect.value = items.targetLang || 'zh-TW';
-        autoTranslateCheckbox.checked = items.autoTranslate !== false;
-      });
-    } else {
-      console.warn('Chrome storage not available, using defaults');
-      sourceLangSelect.value = 'auto';
-      targetLangSelect.value = 'zh-TW';
-      autoTranslateCheckbox.checked = true;
-    }
-  }
-
-  function saveSettings() {
-    const settings = {
-      sourceLang: sourceLangSelect.value,
-      targetLang: targetLangSelect.value,
-      autoTranslate: autoTranslateCheckbox.checked
-    };
-
-    if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.sync) {
-      chrome.storage.sync.set(settings, function() {
-        // Show success feedback
-        showSaveFeedback('儲存成功 ✓');
-      });
-    } else {
-      console.warn('Chrome storage not available, settings not saved');
-      showSaveFeedback('儲存失敗 ✗', true);
-    }
-  }
-
-  function showSaveFeedback(message, isError = false) {
-    const feedback = document.createElement('div');
-    feedback.className = 'save-feedback';
-    feedback.textContent = message;
-    if (isError) {
-      feedback.style.background = 'rgba(244, 67, 54, 0.95)';
-    }
-    document.body.appendChild(feedback);
-    
-    setTimeout(() => {
-      feedback.remove();
-    }, 1200);
-  }
+  // Open Options Page
+  optionsBtn.addEventListener('click', () => {
+    chrome.runtime.openOptionsPage();
+  });
 });

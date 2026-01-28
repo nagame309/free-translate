@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# 浮譯 (Free Translate) 打包腳本
+# 浮譯 (FreeTrans) 打包腳本
 # 用於創建發布版本的 ZIP 檔案
 
-VERSION="1.0.0"
-PACKAGE_NAME="free-translate-v${VERSION}"
+VERSION="2.0.0"
+PACKAGE_NAME="free-trans-v${VERSION}"
 BUILD_DIR="build"
 DIST_DIR="dist"
 
-echo "🎨 浮譯 (Free Translate) 打包工具"
+echo "🎨 浮譯 (FreeTrans) 打包工具"
 echo "版本: ${VERSION}"
 echo "================================"
 

@@ -42,3 +42,6 @@ tmp/
 __pycache__/
 *.py[cod]
 *$py.class
+
+.gemini/
+gha-creds-*.json

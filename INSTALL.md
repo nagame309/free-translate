@@ -1,4 +1,4 @@
-# 浮譯 (Free Translate) v1.0
+# 浮譯 (FreeTrans) v2.0
 
 感謝下載浮譯!
 
@@ -6,7 +6,7 @@
 
 ### 方法一:手動安裝 (推薦)
 
-1. 下載並解壓縮 `free-translate-v1.0.zip`
+1. 下載並解壓縮 `free-trans-v2.0.zip`
 2. 開啟 Chrome 瀏覽器
 3. 前往 `chrome://extensions/`
 4. 開啟右上角的「開發人員模式」
