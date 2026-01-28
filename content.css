@@ -21,14 +21,14 @@
 
 .translation-tooltip {
   position: fixed;
-  background: rgba(30, 30, 46, 0.75);
-  color: #cdd6f4;
+  background: #EFF1F5;
+  color: #4c4f69;
   padding: 8px 10px;
   border-radius: 4px;
   font-size: 14px;
   font-family: 'MapleMono NF CN', 'Maple Mono NF CN', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
-              0 0 0 1px rgba(205, 214, 244, 0.1) inset;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+              0 0 0 1px rgba(76, 79, 105, 0.1) inset;
   z-index: 2147483647;
   max-width: 500px;
   min-width: 120px;
@@ -38,7 +38,7 @@
   pointer-events: auto;
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(88, 91, 112, 0.5);
+  border: 1px solid rgba(172, 176, 190, 0.5);
   text-align: justify;
   text-justify: inter-character;
   
@@ -73,16 +73,16 @@
 }
 
 .translation-content:hover {
-  background: rgba(203, 166, 247, 0.1);
+  background: rgba(253, 85, 134, 0.1);
 }
 
 .translation-content:active {
-  background: rgba(203, 166, 247, 0.2);
+  background: rgba(253, 85, 134, 0.2);
 }
 
 .translation-language-tag {
   font-size: 11px;
-  color: #7f849c;
+  color: #6c6f85;
   margin-bottom: 6px;
   font-weight: 500;
   letter-spacing: 0.5px;
@@ -101,15 +101,15 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #bac2de;
+  color: #5c5f77;
   font-size: 13px;
 }
 
 .translation-loading-spinner {
   width: 16px;
   height: 16px;
-  border: 2px solid #45475a;
-  border-top-color: #b4befe;
+  border: 2px solid #ccd0da;
+  border-top-color: #FD5586;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -120,7 +120,7 @@
 
 /* Error state */
 .translation-error {
-  color: #f38ba8;
+  color: #d20f39;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -148,8 +148,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(166, 227, 161, 0.95);
-  color: #1e1e2e;
+  background: rgba(253, 85, 134, 0.95);
+  color: #eff1f5;
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 13px;
